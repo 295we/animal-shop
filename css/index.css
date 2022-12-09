@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  background: linear-gradient(0deg, #f4f7ff, #f4f7ff), linear-gradient(94.84deg, #fff 3.78%, #fcfdff 9.75%, #e6eeff 102.09%), linear-gradient(126.58deg, #fff -18.12%, rgba(255, 255, 255, 0) 26.77%);
+}
+
+body #app .el-card .el-row .detailCard {
+  width: 235px;
+  border-radius: 5px;
+}
+
+body #app .el-card .el-row .detailCard:hover {
+  box-shadow: 5px 5px 5px #89a;
+}
+
+body #app .el-card .el-row .detailCard .time {
+  font-size: 13px;
+  color: #999;
+}
+
+body #app .el-card .el-row .detailCard .bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+body #app .el-card .el-row .detailCard .button {
+  padding: 0;
+  float: right;
+}
+
+body #app .el-card .el-row .detailCard .image {
+  width: 100%;
+  height: 35vh;
+  display: block;
+}
+
+body #app .el-card .el-row .detailCard .clearfix:before,
+body #app .el-card .el-row .detailCard .clearfix:after {
+  display: table;
+  content: '';
+}
+
+body #app .el-card .el-row .detailCard .clearfix:after {
+  clear: both;
+}
+
+body #app .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 300px;
+  box-sizing: border-box;
+  font-size: 12px;
+  padding: 37.5px 0 0 0;
+  background: #eaecee;
+  margin: 0 auto;
+  text-align: left;
+  font-family: Gilroy, PingFang SC;
+}
