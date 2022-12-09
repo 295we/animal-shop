@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+		<link rel="stylesheet" href="./login-bug.css" />
+		<link rel="stylesheet" href="./login.css" />
+		<style></style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="login-container">
+				<el-form
+					ref="loginForm"
+					class="login-form"
+					auto-complete="on"
+					label-position="left"
+					:rules="loginRules"
+					:model="loginForm"
+				>
+					<h1>欢迎访问宠物商店</h1>
+					<div class="title-container"></div>
+
+					<el-form-item prop="mobile">
+						<el-input
+							ref="username"
+							placeholder="请输入手机号"
+							name="username"
+							type="text"
+							tabindex="1"
+							auto-complete="on"
+							v-model="loginForm.mobile"
+						/>
+					</el-form-item>
+
+					<el-form-item prop="password">
+						<el-input
+							type="password"
+							ref="password"
+							placeholder="请输入密码"
+							name="password"
+							tabindex="2"
+							auto-complete="on"
+							v-model="loginForm.password"
+						/>
+						<!-- enter 是按键的修饰符 native也是修饰符 表示监听组件的原生事件-->
+					</el-form-item>
+
+					<el-button
+						type="primary"
+						style="width: 100%; margin-bottom: 30px"
+						class="loginBtn"
+						@click="handleLogin"
+						>登录</el-button
+					>
+
+					<div class="tips">
+						<span style="margin-right: 20px">账号: 15312344396</span>
+						<span> 密码: 123456</span>
+					</div>
+				</el-form>
+			</div>
+		</div>
+	</body>
+	<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+	<script type="module">
+		import { validMobile } from './validate.js'
+		Vue.config.productionTip = false
+		new Vue({
+			el: '#app',
+			data: function () {
+				const validateMobile = (rule, value, callback) => {
+					// 校验成功执行callback 校验失败也执行 但是需要传入错误对象的实例
+					if (!validMobile(value)) {
+						callback(new Error('手机号的格式不正确'))
+					} else {
+						callback()
+					}
+				}
+				return {
+					loginForm: {
+						mobile: 15312344396,
+						password: '123456',
+					},
+					title: '欢迎访问宠物商店',
+					loginRules: {
+						// validator 自定义校验函数
+						mobile: [
+							{ required: true, trigger: 'blur', message: '手机号不能为空' },
+							{ validator: validateMobile, trigger: 'blur' },
+						],
+						password: [
+							{ required: true, trigger: 'blur', message: '密码不能为空' },
+							{
+								trigger: 'blur',
+								min: 6,
+								max: 16,
+								message: '密码长度必须在6-16位之间',
+							},
+						],
+					},
+				}
+			},
+			methods: {
+				handleLogin() {
+					// 表单的手动校验
+					this.$refs.loginForm.validate(async isOK => {
+						if (isOK) {
+							alert('登录成功')
+							// 操作BOM 用于页面跳转
+							window.open('./index.html', '_self', '', false)
+						}
+					})
+				},
+			},
+		})
+	</script>
+</html>

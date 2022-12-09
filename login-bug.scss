@@ -1,0 +1,71 @@
+$bg: #283443;
+$light_gray: #68b0fe;
+$cursor: #fff;
+
+@supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
+	.login-container .el-input input {
+		color: $cursor;
+	}
+}
+
+html {
+	overflow-y: hidden;
+}
+
+h1 {
+	margin: 0 !important;
+	padding: 0;
+	color: #fff;
+	position: absolute;
+	top: 90px;
+	left: 160px;
+}
+
+.login-form {
+	position: relative;
+	margin: 100px auto !important;
+}
+
+/* reset element-ui css */
+.login-container {
+	background: url('./login.jpg') center no-repeat;
+	height: 100vh;
+	width: 100vw;
+	.el-input {
+		display: inline-block;
+		height: 47px;
+		width: 85%;
+
+		input {
+			background: transparent;
+			border: 0px;
+			-webkit-appearance: none;
+			border-radius: 0px;
+			padding: 12px 5px 12px 15px;
+			color: $light_gray;
+			height: 47px;
+			caret-color: $cursor;
+
+			&:-webkit-autofill {
+				box-shadow: 0 0 0px 1000px $bg inset !important;
+				-webkit-text-fill-color: $cursor !important;
+			}
+		}
+	}
+
+	.el-form-item {
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(255, 255, 255, 0.7); // 输入登录表单的背景色
+		border-radius: 5px;
+		color: #454545;
+	}
+	.el-form-item__error {
+		color: #fff;
+	}
+	.loginBtn {
+		background: #407ffe;
+		height: 64px;
+		line-height: 32px;
+		font-size: 24px;
+	}
+}
