@@ -2,10 +2,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+		/>
 		<link rel="stylesheet" href="./css/login-bug.css" />
 		<link rel="stylesheet" href="./css/login.css" />
-		<style></style>
 	</head>
 
 	<body>
@@ -109,6 +111,7 @@
 					// 表单的手动校验
 					this.$refs.loginForm.validate(async isOK => {
 						if (isOK) {
+							// 操作bom 第二个
 							alert('登录成功')
 							// 操作BOM 用于页面跳转
 							window.open('./index.html', '_self', '', false)

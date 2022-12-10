@@ -1,12 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>详情</title>
-</head>
-<body>
-    
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+		/>
+		<link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+		<link rel="stylesheet" href="./css/detail.css" />
+		<title>详情页</title>
+	</head>
+	<body>
+		<div id="app">
+			<el-menu
+				:default-active="activeIndex"
+				class="el-menu-demo"
+				mode="horizontal"
+				style="display: flex; justify-content: space-around"
+			>
+				<el-tooltip
+					class="item"
+					effect="dark"
+					:content="`欢迎您，${userName}`"
+					placement="bottom"
+				>
+					<el-avatar class="ava">{{userName}}</el-avatar>
+				</el-tooltip>
+				<el-menu-item index="1" @click="exit">退出</el-menu-item>
+				<el-menu-item index="2" @click="goIndex">欢迎访问宠物商店</el-menu-item>
+				<el-menu-item index="3" @click="goDetail">详情</el-menu-item>
+			</el-menu>
+			<div class="line"></div>
+			<div class="container">
+				<!-- 放个轮播图 -->
+				<el-card class="swiperCard">
+					<div class="swiper mySwiper">
+						<div class="swiper-wrapper">
+							<div
+								class="swiper-slide"
+								v-for="(item,index) in swiperImg"
+								:key="item.id"
+							>
+								<img :src="item.img" :alt="item.alt" />
+							</div>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</el-card>
+				<el-card class="liCard">
+					<ul>
+						<li>
+							<img
+								src="https://f.chongwunet.com/chongwunet/202107/dd/6f936781808f90.png"
+								alt=""
+							/>
+							<p>野生动物“貉”为何会在上海小区局部泛滥</p>
+						</li>
+						<li>
+							<img
+								src="https://f.chongwunet.com/chongwunet/202207/5d/44789b0abec415.png"
+								alt=""
+							/>
+							<p>养猫很长时间都没事，突然过敏了，这是啥原因？</p>
+						</li>
+					</ul>
+				</el-card>
+				<el-card class="endCard">
+					<div class="mod-hd">
+						<h1 id="brand">品牌大全</h1>
+					</div>
+					<div class="chongwu_list">
+						<ul>
+							<li v-for="(item,index) in endInfo" :key="index">
+								<img :src="item.img" alt="" />
+								<p>{{item.title}}</p>
+							</li>
+						</ul>
+					</div>
+				</el-card>
+			</div>
+			<footer>
+				<div class="wrapper">
+					<div class="cpq flex_box jc_center">
+						<p>© 2022 宠物商店</p>
+						<p>
+							<a href="https://cn.vuejs.org/" id="eleA"
+								>详情请致电156****4396</a
+							>
+						</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+	<script src="./js/swiper-bundle.min.js"></script>
+	<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+	<script src="./js/detail.js" type="module"></script>
 </html>

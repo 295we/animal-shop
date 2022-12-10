@@ -4,8 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+		/>
 		<link rel="stylesheet" href="./css/index.css" />
+		<script src="./js/index.js" type="module"></script>
 		<title>首页</title>
 	</head>
 	<body>
@@ -16,6 +20,14 @@
 				mode="horizontal"
 				style="display: flex; justify-content: space-around"
 			>
+				<el-tooltip
+					class="item"
+					effect="dark"
+					:content="`欢迎您，${userName}`"
+					placement="bottom"
+				>
+					<el-avatar class="ava">{{userName}}</el-avatar>
+				</el-tooltip>
 				<el-menu-item index="1" @click="exit">退出</el-menu-item>
 				<el-menu-item index="2">欢迎访问宠物商店</el-menu-item>
 				<el-menu-item index="3" @click="goDetail">详情</el-menu-item>
@@ -23,7 +35,11 @@
 			<div class="line"></div>
 			<!-- 这里放置卡片 -->
 			<el-card style="margin-top: 10px">
-				<el-row style="margin-bottom: 15px"><h3 style="text-align: center">在售品种</h3></el-row>
+				<el-row style="margin-bottom: 15px"
+					><h3 style="text-align: center; cursor: pointer" id="categoryDog">
+						在售品种
+					</h3></el-row
+				>
 				<el-row>
 					<el-col
 						:span="8"
@@ -37,7 +53,7 @@
 							<div style="padding: 14px">
 								<span>{{dog.name}}</span>
 								<div class="bottom clearfix">
-									<time class="time">{{ format(currentDate) }}</time>
+									<time class="time">{{ curDate }}</time>
 									<el-popover
 										placement="bottom-start"
 										:title="dog.name"
@@ -45,7 +61,9 @@
 										trigger="hover"
 										:content="dog.detail"
 									>
-										<el-button type="text" class="button" slot="reference">查看详情</el-button>
+										<el-button type="text" class="button" slot="reference"
+											>查看详情</el-button
+										>
 									</el-popover>
 								</div>
 							</div>
@@ -53,81 +71,106 @@
 					</el-col>
 				</el-row>
 			</el-card>
-			<div class="footer"></div>
+			<el-card style="margin-top: 10px" class="impCard">
+				<h2
+					style="
+						font-size: 18px;
+						border-bottom: 2px solid #ffae12;
+						padding-bottom: 3px;
+						font-weight: bolder;
+						width: 845px;
+						margin: 0 auto;
+					"
+				>
+					精选推荐
+				</h2>
+				<ul>
+					<li class="cardList" v-for="(item,index) in infoList" :key="index">
+						<img :src="item.img" alt="" />
+						<div class="info_box">
+							<h3
+								style="
+									margin-bottom: 6px;
+									color: #4f5157;
+									font-weight: 700;
+									font-size: 16px;
+									line-height: 26px;
+									word-break: break-all;
+								"
+							>
+								{{item.title}}
+							</h3>
+							<p
+								style="
+									line-height: 24px;
+									font-size: 14px;
+									color: #666;
+									text-align: justify;
+									word-break: break-all;
+								"
+							>
+								{{item.info}}
+							</p>
+							<div class="others">
+								<i
+									class="el-icon-edit"
+									style="margin-right: 10px; font-size: 14px; cursor: pointer"
+									@click="showDialog"
+								></i>
+								<span>{{item.date}}</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="leftBox">
+					<h2>7*24h</h2>
+					<ul>
+						<li class="litItem" v-for="(item,index) in dateList" :key="index">
+							<h4>{{item.info}}</h4>
+							<p>2022-12-10</p>
+						</li>
+					</ul>
+				</div>
+			</el-card>
+			<!-- 对话框部分 -->
+			<el-dialog
+				title="请文明发表您的评论"
+				:visible.sync="dialogFormVisible"
+				center
+			>
+				<el-form :model="textForm" ref="myForm">
+					<el-form-item
+						label="我的评论"
+						label-width="90px"
+						:rules="rules"
+						prop="text"
+					>
+						<el-input
+							type="textarea"
+							v-model="textForm.text"
+							rows="3"
+							autocomplete="off"
+							ref="inp"
+						></el-input>
+					</el-form-item>
+				</el-form>
+				<div slot="footer" class="dialog-footer">
+					<el-button @click="dialogFormVisible = false">取 消</el-button>
+					<el-button type="primary" @click="submitForm">确 定</el-button>
+				</div>
+			</el-dialog>
+			<footer>
+				<div class="wrapper">
+					<div class="cpq flex_box jc_center">
+						<p>© 2022 宠物商店</p>
+						<p>
+							<a href="https://cn.vuejs.org/">详情请致电156****4396</a>
+						</p>
+					</div>
+				</div>
+			</footer>
 		</div>
 	</body>
 	<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
 	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-
-	<script type="module">
-		Vue.config.productionTip = false
-		new Vue({
-			el: '#app',
-			data() {
-				return {
-					activeIndex: '2',
-					currentDate: new Date(),
-					aniList: [
-						{
-							id: 1,
-							name: '拉布拉多',
-							img: 'https://img2.baidu.com/it/u=2633553080,4290195&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=600',
-							detail: '这是一条拉布拉多犬',
-						},
-						{
-							id: 2,
-							name: '柯基',
-							img: 'https://img2.baidu.com/it/u=4102527816,61729745&fm=253&fmt=auto&app=138&f=JPEG?w=480&h=853',
-							detail: '这是一条柯基',
-						},
-						{
-							id: 3,
-							name: '金毛',
-							img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201508%2F26%2F20150826194244_K53Be.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673195856&t=bd02558b480946ccec6c40743c9f553a',
-							detail: '这是一条金毛',
-						},
-						{
-							id: 4,
-							name: '阿拉斯加',
-							img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fn.sinaimg.cn%2Fsinakd2020320s%2F784%2Fw605h979%2F20200320%2F48e8-ireifzf9861843.jpg&refer=http%3A%2F%2Fn.sinaimg.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1673195880&t=881c27be974272b16eeb2347a545281a',
-							detail: '这是一条阿拉斯加',
-						},
-						{
-							id: 5,
-							name: '哈士奇',
-							img: 'https://img2.baidu.com/it/u=3615374731,1893358528&fm=253&fmt=auto&app=138&f=JPEG?w=426&h=500',
-							detail: '这是一条二哈',
-						},
-						{
-							id: 6,
-							name: '柴犬',
-							img: 'https://img2.baidu.com/it/u=2838255759,3446900015&fm=253&fmt=auto&app=138&f=JPEG?w=363&h=500',
-							detail: '这是一条拉布拉多犬',
-						},
-					],
-				}
-			},
-			methods: {
-				format(dat) {
-					//获取年月日，时间
-					var year = dat.getFullYear()
-					var mon = dat.getMonth() + 1 < 10 ? '0' + (dat.getMonth() + 1) : dat.getMonth() + 1
-					var data = dat.getDate() < 10 ? '0' + dat.getDate() : dat.getDate()
-					var hour = dat.getHours() < 10 ? '0' + dat.getHours() : dat.getHours()
-					var min = dat.getMinutes() < 10 ? '0' + dat.getMinutes() : dat.getMinutes()
-					var seon = dat.getSeconds() < 10 ? '0' + dat.getSeconds() : dat.getSeconds()
-
-					var newDate = year + '-' + mon + '-' + data + ' ' + hour + ':' + min + ':' + seon
-					return newDate
-				},
-				// 退出登录方法
-				exit() {
-					window.open('./login.html', '_self')
-				},
-				goDetail() {
-					window.open('./detail.html', '_self')
-				},
-			},
-		})
-	</script>
 </html>

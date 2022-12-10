@@ -17,6 +17,24 @@ body {
   background: linear-gradient(0deg, #f4f7ff, #f4f7ff), linear-gradient(94.84deg, #fff 3.78%, #fcfdff 9.75%, #e6eeff 102.09%), linear-gradient(126.58deg, #fff -18.12%, rgba(255, 255, 255, 0) 26.77%);
 }
 
+body #app .el-menu {
+  position: fixed;
+  top: 0;
+  position: relative;
+}
+
+body #app .el-menu .el-menu-item {
+  font-size: 16px;
+}
+
+body #app .el-menu .ava {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 8%;
+  transform: translateY(-50%) scale(0.8);
+}
+
 body #app .el-card .el-row .detailCard {
   width: 235px;
   border-radius: 5px;
@@ -69,4 +87,132 @@ body #app .footer {
   margin: 0 auto;
   text-align: left;
   font-family: Gilroy, PingFang SC;
+}
+
+.cardList {
+  width: 845px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between !important;
+  position: relative;
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cardList .info_box {
+  width: 652px;
+  padding-left: 20px;
+}
+
+.cardList img {
+  width: 213px;
+  height: 120px;
+  display: block;
+  border-radius: 8px;
+}
+
+.cardList .others {
+  font-size: 12px;
+  text-align: right;
+}
+
+.el-icon-edit:hover {
+  color: red;
+}
+
+.impCard {
+  position: relative;
+}
+
+.impCard .leftBox {
+  width: 315px;
+  position: absolute;
+  top: 44px;
+  left: 60px;
+  border-top: 3px solid #ffae12;
+}
+
+.impCard .leftBox::before {
+  display: block;
+  content: ' ';
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-top-color: #ffae12;
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+}
+
+.impCard .leftBox h2 {
+  font-size: 18px;
+  padding-top: 12px;
+  font-weight: 600;
+  text-align: center !important;
+}
+
+.impCard .leftBox ul li {
+  position: relative;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 12px 0 12px 18px;
+}
+
+.impCard .leftBox ul li h4 {
+  font-size: 15px;
+  word-break: break-all;
+  text-align: justify;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.impCard .leftBox ul li h4:hover {
+  color: #ffae12;
+}
+
+.impCard .leftBox ul li p {
+  color: #999;
+  font-size: 13px;
+  padding-top: 10px;
+}
+
+.impCard .leftBox ul li::before {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  display: block;
+  content: ' ';
+  width: 8px;
+  height: 8px;
+  background-color: #dedede;
+}
+
+footer {
+  background-color: #373737;
+  color: #f1f1f1;
+  padding: 30px 0;
+  font-size: 14px;
+}
+
+footer .wrapper {
+  margin: 0 auto;
+  width: 1180px;
+}
+
+footer .wrapper .jc_center {
+  display: flex;
+  justify-content: center !important;
+}
+
+footer .wrapper .jc_center p {
+  padding: 20px 20px 0;
+  border-top: 1px solid #4f5157;
+}
+
+footer a {
+  color: #757780;
+  text-decoration: none;
 }
